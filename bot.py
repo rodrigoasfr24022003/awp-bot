@@ -98,7 +98,7 @@ async def hexgrid(interaction, size_x:int, size_y:int):
     pygame.init()
     screen=pygame.display.set_mode((720,720))
     screen.fill(white)
-    font=pygame.font.Font('C:/Users/rodri/AWP-Bot/Ubuntu-R.ttf',int(120/max(colors_x,colors_y)))
+    font=pygame.font.Font(None,int(120/max(colors_x,colors_y)))
     for x in range(colors_x):
         for y in range(colors_y):
             color=(r.randint(0,255),r.randint(0,255),r.randint(0,255))
