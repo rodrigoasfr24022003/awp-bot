@@ -33,14 +33,14 @@ elif sys.platform=='linux':
 
 @client.event
 async def on_message(message):
-    if message.author.id == 1210515998332035092 and message.channel.id==795123441497145364 and 'AWP' in message.content and 'of the Week' not in message.content:
+    if message.author.id == os.getenv('RODRIGO_USER_ID') and message.channel.id==os.getenv('AWP_OF_THE_WEEK_CHANNEL_ID') and 'AWP' in message.content and 'of the Week' not in message.content:
         await asyncio.sleep(1)
         await message.add_reaction(one)
         await asyncio.sleep(1)
         await message.add_reaction(two)
         await asyncio.sleep(1)
         await message.add_reaction(three)
-    elif message.author.id == 1210515998332035092 and message.channel.id==1259185944825958540 and 'BWP' in message.content and 'of the Week' not in message.content:
+    elif message.author.id == os.getenv('RODRIGO_USER_ID') and message.channel.id==os.getenv('BWP_OF_THE_WEEK_CHANNEL_ID') and 'BWP' in message.content and 'of the Week' not in message.content:
         await asyncio.sleep(1)
         await message.add_reaction(one)
         await asyncio.sleep(1)
@@ -48,7 +48,7 @@ async def on_message(message):
         await asyncio.sleep(1)
         await message.add_reaction(three)
 
-@tree.command(name="rng", description="RobTop's RNG, partially ported to this bot.", guild=discord.Object(id=715141595153956904))
+@tree.command(name="rng", description="RobTop's RNG, partially ported to this bot.", guild=discord.Object(id=os.getenv('AWP_GANG_SERVER_ID')))
 async def rng(interaction):
     coinlist=['Heads','Tails']
     coin=r.choice(coinlist)
@@ -93,7 +93,7 @@ async def rng(interaction):
     embed.add_field(name='Output', value='Coin: '+str(coin)+'\n'+'RPS: '+str(rps)+'\n'+'Dice: '+str(dice)+'\n'+cardstring+'\n'+'Color: #'+red_h+green_h+blue_h+'\n'+'Letters: '+lettersOut+'\n'+'Piglin: '+piglinBarter+'\n'+str(r.randint(1,10))+'/10'+' | '+str(r.randint(1,100))+'/100'+' | '+str(r.randint(1,1000))+'/1000'+' | '+str(r.randint(1,1000000))+'/1000000',inline=False)
     await interaction.response.send_message(embed=embed)
 
-@tree.command(name="hexgrid", description="Generates a n x n grid of hex codes with their respecitve colors as BG", guild=discord.Object(id=715141595153956904))
+@tree.command(name="hexgrid", description="Generates a n x n grid of hex codes with their respecitve colors as BG", guild=discord.Object(id=os.getenv('AWP_GANG_SERVER_ID')))
 @app_commands.describe(size_x="Width of the grid, integer 1-11")
 @app_commands.describe(size_y="Height of the grid, integer 1-11")
 async def hexgrid(interaction, size_x:int, size_y:int):
@@ -147,7 +147,7 @@ async def hexgrid(interaction, size_x:int, size_y:int):
 
 @client.event
 async def on_ready():
-    await tree.sync(guild=discord.Object(id=715141595153956904))
+    await tree.sync(guild=discord.Object(id=os.getenv('AWP_GANG_SERVER_ID')))
     print("Command Ready!")
 
 client.run(os.getenv('BOT_TOKEN'))
