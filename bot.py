@@ -1,6 +1,7 @@
 # This example requires the 'message_content' intent.
 
 import os
+import sys
 import random as r
 import pygame
 import numpy as np
@@ -22,6 +23,13 @@ tree = app_commands.CommandTree(client)
 one='1\u20e3'
 two='2\u20e3'
 three='3\u20e3'
+
+image_path=''
+
+if sys.platform=='win32':
+    image_path=os.getenv('DIR_WINDOWS')
+elif sys.platform=='linux':
+    image_path=os.getenv('DIR_LINUX')
 
 @client.event
 async def on_message(message):
@@ -127,7 +135,7 @@ async def hexgrid(interaction, size_x:int, size_y:int):
                 textRect=text.get_rect()
                 textRect.center=(midpoint_x,text_y)
                 screen.blit(text,textRect)
-    pygame.image.save(screen,'C:/Users/rodri/AWP-Bot/grid.png')
+    pygame.image.save(screen,image_path)
     pygame.display.flip()
     pygame.quit()
     # running  = True
@@ -135,7 +143,7 @@ async def hexgrid(interaction, size_x:int, size_y:int):
     #     for event in pygame.event.get():  
     #         if event.type == pygame.QUIT:  
     #             running = False
-    await interaction.response.send_message(file=discord.File('C:/Users/rodri/AWP-Bot/grid.png'))
+    await interaction.response.send_message(file=discord.File(image_path))
 
 @client.event
 async def on_ready():
