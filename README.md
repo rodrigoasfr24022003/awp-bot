@@ -1,2 +1,2 @@
 # awp-bot
-DIscord Bot for AWP-Gang.
+Discord Bot for AWP-Gang.
